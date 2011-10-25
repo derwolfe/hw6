@@ -128,48 +128,73 @@ pivot_t classify_pivot_arg(const string &in_str)
 
 string pivot2string(pivot_t pivot_val)
 {
-    switch (pivot_val) {
-    case MEDIAN_OF_THREE_PIVOT:
-      return string("Median of 3");
-      break;
+  switch (pivot_val) {
+  case MEDIAN_OF_THREE_PIVOT:
+    return string("Median of 3");
+    break;
 
-    case RANDOM_PIVOT:
-      return string("Random");
-      break;
+  case RANDOM_PIVOT:
+    return string("Random");
+    break;
 
-    case DEFAULT_PIVOT:
-      return string("Default");
-      break;
+  case DEFAULT_PIVOT:
+    return string("Default");
+    break;
 
-    case NO_PIVOT:
-      return string("No Pivot");
-      break;
+  case NO_PIVOT:
+    return string("No Pivot");
+    break;
 
-    default:
-      return string("Unknown Pivot Type");
-    }
+  default:
+    return string("Unknown Pivot Type");
+  }
 }
 
 DataType *create_data_set(int sample_size, start_t starting_conditions)
 {
   DataType *data_array;
-
-  /*
-   * IMPLEMENT ME
-   */
+  int descender = sample_size;
+  /* I am allocating to the heap for testing. Though, I am not sure 
+   * where I should be deallocating.
+   */ 
+  data_array = new DataType[sample_size];
 
   /*
    * Determine the Starting Conditions and fill in the initial data
    * acccordingly
    */
   switch (starting_conditions) {
-    /*
-     * IMPLEMENT ME
-     */
+    case ASCENDING_ORDER:
+      for ( int i = 0; i <= sample_size; i++ ) {
+       data_array[i]  = i; 
+      }
+      return data_array;
+      break;
 
-  default:
-    cout <<" ERROR: unknown starting condition type return value" << endl;
-  }
+    case DESCENDING_ORDER:
+        /* [0] == sample size, then sample_size-- for i++
+         */
+      for ( int i = 0; i <= sample_size; i++ ) {
+        data_array[i] = descender--;
+      }
+      return data_array;
+      break;
+
+    case RANDOM_ORDER:
+        /* Use the random number generator and fill up the array
+         * with all of them.
+         */
+      srand( time(NULL) );
+      for (int i = 0; i <= sample_size; i++) {
+        data_array[i] = ( rand() % sample_size ) + 1;
+        cout << data_array[i] << endl;
+      } 
+      return data_array;
+      break;
+     
+    default:
+      cout <<" ERROR: unknown starting condition type return value" << endl;
+    }
 
   return data_array;
 }
@@ -253,17 +278,15 @@ int do_test(int sample_size, start_t starting_conditions,
    * Now, grab a time stamp right before performing the sort, and
    * right after.
    */
-
-  /*
-   * IMPLEMENT ME
-   */
-
+  start = gettimeofday(); 
+  
   switch (sort_selected) {
-
-  /*
-   * IMPLEMENT ME
+    
+  /* 
+   * Slap the stopwatch at the end of the run
    */
-
+  stop = gettimeofday();
+  
   default:
     cout << "ERROR: unknown sort type" << endl;
   }
@@ -278,4 +301,14 @@ int do_test(int sample_size, start_t starting_conditions,
    */
   elapsed_microseconds = microsecond_difference(&start, &stop);
   return elapsed_microseconds;
+}
+/* test routine
+ */
+int main()
+{ 
+  
+//  create_data_set(100, ASCENDING_ORDER);
+  create_data_set(100, DESCENDING_ORDER);
+//  create_data_set(100, RANDOM_ORDER);
+  return (0);
 }
