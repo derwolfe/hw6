@@ -187,7 +187,7 @@ DataType *create_data_set(int sample_size, start_t starting_conditions)
       srand( time(NULL) );
       for (int i = 0; i <= sample_size; i++) {
         data_array[i] = ( rand() % sample_size ) + 1;
-        cout << data_array[i] << endl;
+      //  cout << data_array[i] << endl;
       } 
       return data_array;
       break;
@@ -278,15 +278,36 @@ int do_test(int sample_size, start_t starting_conditions,
    * Now, grab a time stamp right before performing the sort, and
    * right after.
    */
-  start = gettimeofday(); 
+  gettimeofday(&start, NULL); 
   
-  switch (sort_selected) {
+  switch (sort_selected) { 
+    case BUBBLE_SORT:  
+      bubbleSort(data_array, sample_size); 
     
+    case INSERTION_SORT:
+      insertionSort(data_array, sample_size);
+
+    case MERGE_SORT:
+      mergesort(data_array, data_array[0], data_array[sample_size]);
+/* figure out the implementation of quick sort and how 
+ * the pivot should be chosen.
+ */
+//    case QUICK_SORT:
+//      choosePivot(data_array,
+//          data_array[0],
+//          data_array[sample_size - 1];
+//          
+//      quicksort(data_array, 
+//          data_array[1], 
+//          data_array[sample_size],
+//
+    case SELECTION_SORT:
+      selectionSort(data_array, sample_size);
+
   /* 
    * Slap the stopwatch at the end of the run
    */
-  stop = gettimeofday();
-  
+  gettimeofday(&stop, NULL);
   default:
     cout << "ERROR: unknown sort type" << endl;
   }
@@ -304,11 +325,11 @@ int do_test(int sample_size, start_t starting_conditions,
 }
 /* test routine
  */
-int main()
-{ 
+//int main()
+//{ 
   
 //  create_data_set(100, ASCENDING_ORDER);
-  create_data_set(100, DESCENDING_ORDER);
+//  create_data_set(100, DESCENDING_ORDER);
 //  create_data_set(100, RANDOM_ORDER);
-  return (0);
-}
+//  return (0);
+//}
