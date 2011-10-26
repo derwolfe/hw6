@@ -19,22 +19,46 @@ using namespace std;
 void choosePivot(DataType theArray[], int first, int last, pivot_t pivot_choice)
 {
   int range;
-
-  range = last - first;
+  
+  range = last - first; // stores the size of the array
 
   /*
    * Taking no action chooses the first item as the pivot 
    */
   if ( pivot_choice == MEDIAN_OF_THREE_PIVOT) {
+    if ( range < 3 ) {
+      ; // do nothing
+    } else {
+      int middle = first + last / 2;
+      if ( middle > first ) {
+        swap ( middle, first );
+      }
+      if ( first > last ) {
+        swap ( first, last );
+      }
+      if ( middle > last ) {
+        swap ( middle, last );
+       }
+
     /*
-     * IMPLEMENT ME
+     * find the median of the first, middle, and last elements
      */
+    }
   }
 
   if ( pivot_choice == RANDOM_PIVOT) {
     /*
-     * IMPLEMENT ME
+     * Generate a random number using current time as a seed
+     * then, to make sure the number falls inside the range, 
+     * take the modulo of the number and add 1, to account for 
+     * the index.
+     * 
+     * Then swap the first and randomly indexed values.
      */
+    int random_index;
+    srand( time(NULL) );
+    random_index = ( rand () % range ) + 1;
+    swap( theArray[first], theArray[random_index] );
   }
 
   return; 
