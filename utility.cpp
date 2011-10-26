@@ -283,15 +283,18 @@ int do_test(int sample_size, start_t starting_conditions,
   switch (sort_selected) { 
     case BUBBLE_SORT:  
       bubbleSort(data_array, sample_size); 
-    
+      break; 
     case INSERTION_SORT:
       insertionSort(data_array, sample_size);
-
+      break;
     case MERGE_SORT:
       mergesort(data_array, data_array[0], data_array[sample_size]);
-/* figure out the implementation of quick sort and how 
+      break;
+/* 
+ * figure out the implementation of quick sort and how 
  * the pivot should be chosen.
  */
+
 //    case QUICK_SORT:
 //      choosePivot(data_array,
 //          data_array[0],
@@ -300,18 +303,18 @@ int do_test(int sample_size, start_t starting_conditions,
 //      quicksort(data_array, 
 //          data_array[1], 
 //          data_array[sample_size],
-//
+
     case SELECTION_SORT:
       selectionSort(data_array, sample_size);
-
+      break;
   /* 
    * Slap the stopwatch at the end of the run
    */
-  gettimeofday(&stop, NULL);
-  default:
-    cout << "ERROR: unknown sort type" << endl;
+    default:
+      cout << "ERROR: unknown sort type" << endl;
+      break;
   }
-
+  gettimeofday(&stop, NULL);
   /*
    * IMPLEMENT ME
    */
@@ -323,13 +326,4 @@ int do_test(int sample_size, start_t starting_conditions,
   elapsed_microseconds = microsecond_difference(&start, &stop);
   return elapsed_microseconds;
 }
-/* test routine
- */
-//int main()
-//{ 
-  
-//  create_data_set(100, ASCENDING_ORDER);
-//  create_data_set(100, DESCENDING_ORDER);
-//  create_data_set(100, RANDOM_ORDER);
-//  return (0);
-//}
+
