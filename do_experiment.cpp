@@ -52,9 +52,12 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
   /*
    * Output Sort name and Column Headers
    */
-  
+  cout << endl;
   cout << sort2string(sort_type) << " Results" << endl;
-  cout << pivot2string(pivot_type) << endl;
+  /* only add pivot information if there is a pivot */
+  if (pivot_type != NO_PIVOT) {
+    cout << pivot2string(pivot_type) << endl;
+  }
   /* make the line of dashes
    */
   cout << setfill('-') << setw(line_width) << '-' << endl;
@@ -63,9 +66,9 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
    */
   int index = 0;
   while ( index < data_size ) { 
-    cout << "Initial";
+    cout << setw(label_width) << left << "Initial";
     for (int i = 0; i <= 4; i++) {
-      cout << setw(label_width) <<  sample_sizes[index]; 
+      cout << setw(number_width) <<  sample_sizes[index]; 
       index++;
       if ( index >= data_size ) {
         cout << endl << endl;
@@ -80,10 +83,10 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
    */
   index = 0;
   while ( index < data_size ) { //come up with replacement for data_size
-    cout << "Ascending";
+    cout << setw(label_width) << "Ascending";
     for (int i = 0; i <= 4; i++) {
       //align in the right of the cell
-      cout << setw(label_width) << right << elapsed_times[ASCENDING_ORDER][index]; 
+      cout << setw(number_width) << elapsed_times[ASCENDING_ORDER][index]; 
       index++;
       if ( index >= data_size ) {
         cout << endl << endl;
@@ -97,10 +100,10 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
    */
   index = 0;
   while ( index < data_size ) { //come up with replacement for data_size
-    cout << "Descending";
+    cout << setw(label_width) << "Descending";
     for (int i = 0; i <= 4; i++) {
       //align in the right of the cell
-      cout << setw(label_width) << elapsed_times[DESCENDING_ORDER][index]; 
+      cout << setw(number_width) << elapsed_times[DESCENDING_ORDER][index]; 
       index++;
       if ( index >= data_size ) {
         cout << endl << endl;
@@ -114,9 +117,9 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
    */
   index = 0;
   while ( index < data_size ) { //come up with replacement for data_size
-    cout << "Random";
+    cout << setw(label_width) << "Random";
     for (int i = 0; i <= 4; i++) {
-      cout << setw(label_width) << elapsed_times[RANDOM_ORDER][index]; 
+      cout << setw(number_width) << elapsed_times[RANDOM_ORDER][index]; 
       index++;
       if ( index >= data_size ) {
         cout << endl << endl;
