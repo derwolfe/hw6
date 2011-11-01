@@ -207,7 +207,7 @@ const int  MICROSECONDS_PER_SECOND = 1000000;
 int microsecond_difference(struct timeval *start, struct timeval *stop)
 {
   int elapsed_microseconds;
-
+  int extra_seconds;
   if ( start->tv_sec > stop->tv_sec ) {
     cout << "ERROR: the start seconds is greater than the stop seconds!" << endl;
     return 0;
@@ -230,8 +230,10 @@ int microsecond_difference(struct timeval *start, struct timeval *stop)
      * the number from the rollover to the stop value.
      */
     /*
-     * IMPLEMENT ME
+     * IMPLEMENT ME: stop will be less than start, so you need to find the
+     * difference then add a second back into it.
      */
+    elapsed_microseconds = MICROSECONDS_PER_SECOND + (start->tv_sec - stop->tv_sec);
   } else {
     /*
      * The seconds rooled over more than once, so figure the offsets
@@ -242,8 +244,15 @@ int microsecond_difference(struct timeval *start, struct timeval *stop)
      * but I think this is clearer code. YMMV.
      */
     /*
-     * IMPLEMENT ME
+     * IMPLEMENT ME: set an incrementer on each roll over is incremented up,
+     * then multiple the incrementer and add it. This doesn't work, there aer
+     * several conditions here it feels. 
      */
+    if (start->tv_sec == stop->tv_sec) {
+      extra_seconds++; 
+    } else {
+      elapsed_microseconds = (start->tv_sec - stop->tv_sec) + extra_seconds * MICROSECONDS_PER_SECOND;
+    }  
   }
 
   return elapsed_microseconds;
@@ -292,18 +301,16 @@ int do_test(int sample_size, start_t starting_conditions,
       break;
 /* 
  * figure out the implementation of quick sort and how 
- * the pivot should be chosen.
+ * the pivot should be chosen. At this point what aspects of the pivot 
+ * should be known, and what do you need to do to check it?
  */
-
-//    case QUICK_SORT:
-//      choosePivot(data_array,
-//          data_array[0],
-//          data_array[sample_size - 1];
-//          
-//      quicksort(data_array, 
-//          data_array[1], 
-//          data_array[sample_size],
-
+    case QUICK_SORT:
+      quicksort(data_array,
+          data_array[1], 
+          data_array[sample_size],
+          pivot_selected);
+      break;
+          
     case SELECTION_SORT:
       selectionSort(data_array, sample_size);
       break;

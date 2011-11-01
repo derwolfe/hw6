@@ -25,21 +25,26 @@ void choosePivot(DataType theArray[], int first, int last, pivot_t pivot_choice)
   /*
    * Taking no action chooses the first item as the pivot 
    */
+  
   if ( pivot_choice == MEDIAN_OF_THREE_PIVOT) {
     if ( range < 3 ) {
-      ; // do nothing
+      ; // do nothing, take the first element as the pivot
     } else {
-      int middle = first + last / 2;
-      if ( middle > first ) {
-        swap ( middle, first );
+      /* 
+       * With range > 3, start swapping elements. Compare two elements
+       * against one another, bring the greater one forward. 
+       */
+      int middle = ( first + last ) / 2;
+      if ( theArray[middle] > theArray[first] ) {
+        swap ( theArray[middle], theArray[first] );
       }
-      if ( first > last ) {
-        swap ( first, last );
+      if ( theArray[first] > theArray[last] ) {
+        swap ( theArray[first], theArray[last] );
       }
-      if ( middle > last ) {
-        swap ( middle, last );
-       }
-
+      if ( theArray[middle] > theArray[last] ) {
+        swap ( theArray[middle], theArray[last] );
+      }
+    
     /*
      * find the median of the first, middle, and last elements
      */
@@ -57,7 +62,7 @@ void choosePivot(DataType theArray[], int first, int last, pivot_t pivot_choice)
      */
     int random_index;
     srand( time(NULL) );
-    random_index = ( rand () % range ) + 1;
+    random_index = ( rand() % range ) + 1;
     swap( theArray[first], theArray[random_index] );
   }
 

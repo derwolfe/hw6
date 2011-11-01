@@ -1,0 +1,9 @@
+This exercise is meant to teach us how to test algorithms and understand their
+complexity. 
+
+TASKS:
+implement:
+    quicksort.cpp 
+    do_experiment.cpp
+    utility.cpp 
+    setup tests for all algos. Mainly formatting of output functions.

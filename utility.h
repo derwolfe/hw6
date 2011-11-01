@@ -1,6 +1,6 @@
 enum sort_t  { BUBBLE_SORT, INSERTION_SORT, MERGE_SORT, QUICK_SORT, SELECTION_SORT };
 enum start_t { ASCENDING_ORDER, DESCENDING_ORDER, RANDOM_ORDER };
-enum pivot_t { MEDIAN_OF_THREE_PIVOT, RANDOM_PIVOT, NO_PIVOT };
+enum pivot_t { MEDIAN_OF_THREE_PIVOT, RANDOM_PIVOT, DEFAULT_PIVOT, NO_PIVOT }; //DEFAULT_PIVOT was NO_PIVOT
 
 extern sort_t    classify_sort_arg(const string &in_str);
 extern string    sort2string(sort_t sort_val);
