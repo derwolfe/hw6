@@ -324,9 +324,9 @@ int do_test(int sample_size, start_t starting_conditions,
   }
   gettimeofday(&stop, NULL);
   /*
-   * IMPLEMENT ME
+   * delete the allocated array
    */
-
+  delete data_array;
   /*
    * Figure out the elapsed time between the two, in micorseconds, and
    * return the value to the calling context.

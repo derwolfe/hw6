@@ -42,7 +42,7 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
   for (int i = 0; i <= 4; i++) {
     elapsed_times[ASCENDING_ORDER][i] = do_test( sample_sizes[i], ASCENDING_ORDER, sort_type, pivot_type);
     elapsed_times[DESCENDING_ORDER][i] = do_test( sample_sizes[i], DESCENDING_ORDER, sort_type, pivot_type);
-//    elapsed_times[RANDOM_ORDER][i] = do_test( sample_sizes[i], RANDOM_ORDER, sort_type, pivot_type);
+    elapsed_times[RANDOM_ORDER][i] = do_test( sample_sizes[i], RANDOM_ORDER, sort_type, pivot_type);
   }
   /*
    * Example call to do-test - note you can use ENUMS as array indices
@@ -62,7 +62,7 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
   /* then reset the fill 
    */
   int index = 0;
-  while ( index < data_size ) { //come up with replacement for data_size
+  while ( index < data_size ) { 
     cout << "Initial";
     for (int i = 0; i <= 4; i++) {
       cout << setw(label_width) <<  sample_sizes[index]; 
@@ -83,7 +83,7 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
     cout << "Ascending";
     for (int i = 0; i <= 4; i++) {
       //align in the right of the cell
-      cout << setw(label_width) << elapsed_times[ASCENDING_ORDER][index]; 
+      cout << setw(label_width) << right << elapsed_times[ASCENDING_ORDER][index]; 
       index++;
       if ( index >= data_size ) {
         cout << endl << endl;
@@ -136,12 +136,12 @@ int main(const int argc, char *argv[])
   }
 
   do_table(BUBBLE_SORT, NO_PIVOT);
-//  do_table(INSERTION_SORT, NO_PIVOT);
-//  do_table(MERGE_SORT, NO_PIVOT);
-//  do_table(SELECTION_SORT, NO_PIVOT);
-//  do_table(QUICK_SORT, DEFAULT_PIVOT);
-//  do_table(QUICK_SORT, MEDIAN_OF_THREE_PIVOT);
-//  do_table(QUICK_SORT, RANDOM_PIVOT);
+  do_table(INSERTION_SORT, NO_PIVOT);
+  do_table(MERGE_SORT, NO_PIVOT);
+  do_table(SELECTION_SORT, NO_PIVOT);
+  do_table(QUICK_SORT, DEFAULT_PIVOT);
+  do_table(QUICK_SORT, MEDIAN_OF_THREE_PIVOT);
+  do_table(QUICK_SORT, RANDOM_PIVOT);
 
   exit(0);
 }
