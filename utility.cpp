@@ -215,6 +215,7 @@ int microsecond_difference(struct timeval *start, struct timeval *stop)
 
   /*
    * Several subcases are more easily handled individually
+   * FIXME!!!!!!
    */
   if ( start->tv_sec == stop->tv_sec) {
     /*
