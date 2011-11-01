@@ -41,8 +41,8 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
    */
   for (int i = 0; i <= 4; i++) {
     elapsed_times[ASCENDING_ORDER][i] = do_test( sample_sizes[i], ASCENDING_ORDER, sort_type, pivot_type);
-//    elapsed_times[DESCENDING_ORDER][i] = do_test( sample_sizes[i], DESCENDING_ORDER, sort_type, pivot_type);
-    elapsed_times[RANDOM_ORDER][i] = do_test( sample_sizes[i], RANDOM_ORDER, sort_type, pivot_type);
+    elapsed_times[DESCENDING_ORDER][i] = do_test( sample_sizes[i], DESCENDING_ORDER, sort_type, pivot_type);
+//    elapsed_times[RANDOM_ORDER][i] = do_test( sample_sizes[i], RANDOM_ORDER, sort_type, pivot_type);
   }
   /*
    * Example call to do-test - note you can use ENUMS as array indices
@@ -53,78 +53,77 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
    * Output Sort name and Column Headers
    */
   
-    cout << sort2string(sort_type) << " Results" << endl;
-    cout << pivot2string(pivot_type) << endl;
-    /* make the line of dashes
-     */
-    cout << setfill('-') << setw(line_width) << '-' << endl;
-    cout << setfill(' ');
-    /* then reset the fill 
-     */
-    int index = 0;
-    while ( index < data_size ) { //come up with replacement for data_size
-      cout << "Initial";
-      for (int i = 0; i <= 4; i++) {
-        cout << setw(label_width) <<  sample_sizes[index]; 
-        index++;
-        if ( index >= data_size ) {
-          cout << endl << endl;
-          break;
-        }
+  cout << sort2string(sort_type) << " Results" << endl;
+  cout << pivot2string(pivot_type) << endl;
+  /* make the line of dashes
+   */
+  cout << setfill('-') << setw(line_width) << '-' << endl;
+  cout << setfill(' ');
+  /* then reset the fill 
+   */
+  int index = 0;
+  while ( index < data_size ) { //come up with replacement for data_size
+    cout << "Initial";
+    for (int i = 0; i <= 4; i++) {
+      cout << setw(label_width) <<  sample_sizes[index]; 
+      index++;
+      if ( index >= data_size ) {
+        cout << endl << endl;
+        break;
       }
     }
+  }
   
 
   /*
    * Ascending row
    */
-    index = 0;
-    while ( index < data_size ) { //come up with replacement for data_size
-      cout << "Ascending";
-      for (int i = 0; i <= 4; i++) {
-        //align in the right of the cell
-        cout << setw(label_width) << elapsed_times[ASCENDING_ORDER][index]; 
-        index++;
-        if ( index >= data_size ) {
-          cout << endl << endl;
-          break;
-        }
+  index = 0;
+  while ( index < data_size ) { //come up with replacement for data_size
+    cout << "Ascending";
+    for (int i = 0; i <= 4; i++) {
+      //align in the right of the cell
+      cout << setw(label_width) << elapsed_times[ASCENDING_ORDER][index]; 
+      index++;
+      if ( index >= data_size ) {
+        cout << endl << endl;
+        break;
       }
     }
+  }
 
   /*
    * Descending Row
    */
-    index = 0;
-    while ( index < data_size ) { //come up with replacement for data_size
-      cout << "Descending";
-      for (int i = 0; i <= 4; i++) {
-        //align in the right of the cell
-        cout << setw(label_width) << elapsed_times[DESCENDING_ORDER][index]; 
-        index++;
-        if ( index >= data_size ) {
-          cout << endl << endl;
-          break;
-        }
+  index = 0;
+  while ( index < data_size ) { //come up with replacement for data_size
+    cout << "Descending";
+    for (int i = 0; i <= 4; i++) {
+      //align in the right of the cell
+      cout << setw(label_width) << elapsed_times[DESCENDING_ORDER][index]; 
+      index++;
+      if ( index >= data_size ) {
+        cout << endl << endl;
+        break;
       }
     }
+  }
 
   /*
    * Random Row
    */
-    index = 0;
-    while ( index < data_size ) { //come up with replacement for data_size
-      cout << "Random";
-      for (int i = 0; i <= 4; i++) {
-        cout << setw(label_width) << elapsed_times[RANDOM_ORDER][index]; 
-        index++;
-        if ( index >= data_size ) {
-          cout << endl << endl;
-          break;
-        }
+  index = 0;
+  while ( index < data_size ) { //come up with replacement for data_size
+    cout << "Random";
+    for (int i = 0; i <= 4; i++) {
+      cout << setw(label_width) << elapsed_times[RANDOM_ORDER][index]; 
+      index++;
+      if ( index >= data_size ) {
+        cout << endl << endl;
+        break;
       }
     }
-
+  }
 }
 
 
