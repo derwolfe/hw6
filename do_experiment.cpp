@@ -51,6 +51,8 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
 
   /*
    * Output Sort name and Column Headers
+   *
+   * Also, make alternate output statements to create a CSV to throw to excel.
    */
   cout << endl;
   cout << sort2string(sort_type) << " Results" << endl;
@@ -63,7 +65,10 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
   cout << setfill('-') << setw(line_width) << '-' << endl;
   cout << setfill(' ');
   /* then reset the fill 
+   * 
+   * Set up the headings for the table
    */
+
   int index = 0;
   while ( index < data_size ) { 
     cout << setw(label_width) << left << "Initial";
@@ -79,13 +84,12 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
   
 
   /*
-   * Ascending row
+   * Ascending row data
    */
   index = 0;
-  while ( index < data_size ) { //come up with replacement for data_size
+  while ( index < data_size ) { 
     cout << setw(label_width) << "Ascending";
     for (int i = 0; i <= 4; i++) {
-      //align in the right of the cell
       cout << setw(number_width) << elapsed_times[ASCENDING_ORDER][index]; 
       index++;
       if ( index >= data_size ) {
@@ -99,10 +103,9 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
    * Descending Row
    */
   index = 0;
-  while ( index < data_size ) { //come up with replacement for data_size
+  while ( index < data_size ) { 
     cout << setw(label_width) << "Descending";
     for (int i = 0; i <= 4; i++) {
-      //align in the right of the cell
       cout << setw(number_width) << elapsed_times[DESCENDING_ORDER][index]; 
       index++;
       if ( index >= data_size ) {
@@ -116,7 +119,7 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
    * Random Row
    */
   index = 0;
-  while ( index < data_size ) { //come up with replacement for data_size
+  while ( index < data_size ) { 
     cout << setw(label_width) << "Random";
     for (int i = 0; i <= 4; i++) {
       cout << setw(number_width) << elapsed_times[RANDOM_ORDER][index]; 
@@ -139,12 +142,12 @@ int main(const int argc, char *argv[])
   }
 
   do_table(BUBBLE_SORT, NO_PIVOT);
-  do_table(INSERTION_SORT, NO_PIVOT);
-  do_table(MERGE_SORT, NO_PIVOT);
-  do_table(SELECTION_SORT, NO_PIVOT);
-  do_table(QUICK_SORT, DEFAULT_PIVOT);
-  do_table(QUICK_SORT, MEDIAN_OF_THREE_PIVOT);
-  do_table(QUICK_SORT, RANDOM_PIVOT);
-
+//  do_table(INSERTION_SORT, NO_PIVOT);
+//  do_table(MERGE_SORT, NO_PIVOT);
+//  do_table(SELECTION_SORT, NO_PIVOT);
+//  do_table(QUICK_SORT, DEFAULT_PIVOT);
+//  do_table(QUICK_SORT, MEDIAN_OF_THREE_PIVOT);
+//  do_table(QUICK_SORT, RANDOM_PIVOT);
+  
   exit(0);
 }

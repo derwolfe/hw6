@@ -207,7 +207,7 @@ const int  MICROSECONDS_PER_SECOND = 1000000;
 int microsecond_difference(struct timeval *start, struct timeval *stop)
 {
   int elapsed_microseconds;
-  int extra_seconds;
+  
   if ( start->tv_sec > stop->tv_sec ) {
     cout << "ERROR: the start seconds is greater than the stop seconds!" << endl;
     return 0;
@@ -224,7 +224,10 @@ int microsecond_difference(struct timeval *start, struct timeval *stop)
      * values.
      */
     elapsed_microseconds = stop->tv_usec - start->tv_usec;
+  
   } else if ( start->tv_sec == (stop->tv_sec - 1) ) {
+    // test
+    cout << "seconds rolled once" << endl;
     /*
      * The seconds rolled over only once the elapsed is just the
      * number of micorsedconds from the start to the rollover, plus
@@ -234,7 +237,9 @@ int microsecond_difference(struct timeval *start, struct timeval *stop)
      * IMPLEMENT ME: stop will be less than start, so you need to find the
      * difference then add a second back into it.
      */
-    elapsed_microseconds = MICROSECONDS_PER_SECOND + (start->tv_sec - stop->tv_sec);
+   // elapsed_microseconds = MICROSECONDS_PER_SECOND + (start->tv_usec - stop->tv_usec);
+    elapsed_microseconds = ( MICROSECONDS_PER_SECOND - start->tv_usec ) + stop->tv_usec;
+    
   } else {
     /*
      * The seconds rooled over more than once, so figure the offsets
@@ -243,19 +248,13 @@ int microsecond_difference(struct timeval *start, struct timeval *stop)
      *
      * Yes, we could combine this case with the roll-over once case,
      * but I think this is clearer code. YMMV.
+     *
+     * test to see if the else loop is hit
      */
-    /*
-     * IMPLEMENT ME: set an incrementer on each roll over is incremented up,
-     * then multiple the incrementer and add it. This doesn't work, there aer
-     * several conditions here it feels. 
-     */
-    if (start->tv_sec == stop->tv_sec) {
-      extra_seconds++; 
-    } else {
-      elapsed_microseconds = (start->tv_sec - stop->tv_sec) + extra_seconds * MICROSECONDS_PER_SECOND;
-    }  
+    cout << "start " << start->tv_usec << "  stop: " << stop->tv_usec << endl; 
+    elapsed_microseconds = ( MICROSECONDS_PER_SECOND - start->tv_usec ) + stop->tv_usec;
   }
-
+  
   return elapsed_microseconds;
 }
 
@@ -323,10 +322,13 @@ int do_test(int sample_size, start_t starting_conditions,
       break;
   }
   gettimeofday(&stop, NULL);
+  
   /*
    * delete the allocated array
    */
+  
   delete data_array;
+  data_array = NULL;
   /*
    * Figure out the elapsed time between the two, in micorseconds, and
    * return the value to the calling context.
