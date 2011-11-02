@@ -252,7 +252,7 @@ int microsecond_difference(struct timeval *start, struct timeval *stop)
      * test to see if the else loop is hit
      */
     cout << "start " << start->tv_usec << "  stop: " << stop->tv_usec << endl; 
-    elapsed_microseconds = ( MICROSECONDS_PER_SECOND - start->tv_usec ) + stop->tv_usec;
+    elapsed_microseconds = stop->tv_sec - start->tv_sec * MICROSECONDS_PER_SECOND + ( MICROSECONDS_PER_SECOND - start->tv_usec + stop->tv_usec);
   }
   
   return elapsed_microseconds;
