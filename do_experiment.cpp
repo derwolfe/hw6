@@ -29,7 +29,7 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
   const int number_width = 10;
   const int label_width  = 12;
   const int line_width   = label_width + 5*number_width;
-  const int data_size    = 4;
+  const int data_size    = 5;
 
   /*
    * Perform the sorts for all the combination of parameter values and
@@ -60,10 +60,7 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
   if (pivot_type != NO_PIVOT) {
     cout << pivot2string(pivot_type) << endl;
   }
-  /* make the line of dashes
-   */
-  cout << setfill('-') << setw(line_width) << '-' << endl;
-  cout << setfill(' ');
+
   /* then reset the fill 
    * 
    * Set up the headings for the table
@@ -76,13 +73,16 @@ void do_table(sort_t sort_type, pivot_t pivot_type)
       cout << setw(number_width) <<  sample_sizes[index]; 
       index++;
       if ( index >= data_size ) {
-        cout << endl << endl;
+        cout << endl;
         break;
       }
     }
   }
   
-
+  /* make the line of dashes
+   */
+  cout << setfill('-') << setw(line_width) << '-' << endl;
+  cout << setfill(' ');
   /*
    * Ascending row data
    */
@@ -142,12 +142,12 @@ int main(const int argc, char *argv[])
   }
 
   do_table(BUBBLE_SORT, NO_PIVOT);
-//  do_table(INSERTION_SORT, NO_PIVOT);
-//  do_table(MERGE_SORT, NO_PIVOT);
-//  do_table(SELECTION_SORT, NO_PIVOT);
-//  do_table(QUICK_SORT, DEFAULT_PIVOT);
-//  do_table(QUICK_SORT, MEDIAN_OF_THREE_PIVOT);
-//  do_table(QUICK_SORT, RANDOM_PIVOT);
+  do_table(INSERTION_SORT, NO_PIVOT);
+  do_table(MERGE_SORT, NO_PIVOT);
+  do_table(SELECTION_SORT, NO_PIVOT);
+  do_table(QUICK_SORT, DEFAULT_PIVOT);
+  do_table(QUICK_SORT, MEDIAN_OF_THREE_PIVOT);
+  do_table(QUICK_SORT, RANDOM_PIVOT);
   
   exit(0);
 }

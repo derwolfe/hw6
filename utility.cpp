@@ -215,7 +215,6 @@ int microsecond_difference(struct timeval *start, struct timeval *stop)
 
   /*
    * Several subcases are more easily handled individually
-   * FIXME!!!!!!
    */
   if ( start->tv_sec == stop->tv_sec) {
     /*
@@ -236,7 +235,6 @@ int microsecond_difference(struct timeval *start, struct timeval *stop)
      * difference then add a second back into it.
      */
     elapsed_microseconds = ( MICROSECONDS_PER_SECOND - start->tv_usec ) + stop->tv_usec;
-    
   } else {
     /*
      * The seconds rooled over more than once, so figure the offsets
@@ -246,10 +244,10 @@ int microsecond_difference(struct timeval *start, struct timeval *stop)
      * Yes, we could combine this case with the roll-over once case,
      * but I think this is clearer code. YMMV.
      *
-     * test to see if the else loop is hit
      */
-    cout << "start " << start->tv_sec << ":" << start->tv_usec << "  stop: " << stop->tv_sec << ":" << stop->tv_usec << endl; 
+ //   cout << "start " << start->tv_sec << ":" << start->tv_usec << "  stop: " << stop->tv_sec << ":" << stop->tv_usec << endl; 
     elapsed_microseconds = (stop->tv_sec - start->tv_sec ) * MICROSECONDS_PER_SECOND + ( MICROSECONDS_PER_SECOND - start->tv_usec + stop->tv_usec);
+ //   elapsed_microseconds = (stop->tv_sec - start->tv_sec ) * MICROSECONDS_PER_SECOND + ( stop->tv_usec - start->tv_usec ); 
   }
   
   return elapsed_microseconds;
@@ -294,7 +292,7 @@ int do_test(int sample_size, start_t starting_conditions,
       insertionSort(data_array, sample_size);
       break;
     case MERGE_SORT:
-      mergesort(data_array, data_array[0], data_array[sample_size]);
+      mergesort(data_array, 0, sample_size - 1);
       break;
 /* 
  * figure out the implementation of quick sort and how 
@@ -303,8 +301,8 @@ int do_test(int sample_size, start_t starting_conditions,
  */
     case QUICK_SORT:
       quicksort(data_array,
-          data_array[1], 
-          data_array[sample_size],
+          0, 
+          sample_size - 1,
           pivot_selected);
       break;
           
