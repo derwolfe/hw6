@@ -226,8 +226,6 @@ int microsecond_difference(struct timeval *start, struct timeval *stop)
     elapsed_microseconds = stop->tv_usec - start->tv_usec;
   
   } else if ( start->tv_sec == (stop->tv_sec - 1) ) {
-    // test
-    cout << "seconds rolled once" << endl;
     /*
      * The seconds rolled over only once the elapsed is just the
      * number of micorsedconds from the start to the rollover, plus
@@ -237,7 +235,6 @@ int microsecond_difference(struct timeval *start, struct timeval *stop)
      * IMPLEMENT ME: stop will be less than start, so you need to find the
      * difference then add a second back into it.
      */
-   // elapsed_microseconds = MICROSECONDS_PER_SECOND + (start->tv_usec - stop->tv_usec);
     elapsed_microseconds = ( MICROSECONDS_PER_SECOND - start->tv_usec ) + stop->tv_usec;
     
   } else {
@@ -251,8 +248,8 @@ int microsecond_difference(struct timeval *start, struct timeval *stop)
      *
      * test to see if the else loop is hit
      */
-    cout << "start " << start->tv_usec << "  stop: " << stop->tv_usec << endl; 
-    elapsed_microseconds = stop->tv_sec - start->tv_sec * MICROSECONDS_PER_SECOND + ( MICROSECONDS_PER_SECOND - start->tv_usec + stop->tv_usec);
+    cout << "start " << start->tv_sec << ":" << start->tv_usec << "  stop: " << stop->tv_sec << ":" << stop->tv_usec << endl; 
+    elapsed_microseconds = (stop->tv_sec - start->tv_sec ) * MICROSECONDS_PER_SECOND + ( MICROSECONDS_PER_SECOND - start->tv_usec + stop->tv_usec);
   }
   
   return elapsed_microseconds;
