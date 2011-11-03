@@ -3,7 +3,7 @@
 # runs all the experiments in an orderly way, presenting the results
 # in an orderly way.
 #
-KUID = 2054583
+KUID = 
 LAB_NAME = complexity
 
 OBJECT_FILES = utility.o bubbleSort.o insertionSort.o mergesort.o quicksort.o selectionSort.o
